@@ -16,8 +16,8 @@ The environment variables are:
 |Environment Variable|Default|Description|
 |--------------------|-------|-----------|
 |CERT_PATH|`/certs`|Path to directory where certs will be placed|
-|ACME_PATH|` `|Path to acme.json created by traefik|
-|ACME_FILE|` `|Filename (usually acme.json) created by traefik|
+|ACME_PATH|`/acme`|Path to acme.json created by traefik|
+|ACME_FILE|`acme.json`|Filename (usually acme.json) created by traefik|
 
 ## Output
 

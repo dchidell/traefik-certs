@@ -131,8 +131,16 @@ func main() {
     certPath = "/certs"
   }
 
-  acmePath, _ := os.LookupEnv("ACME_PATH")
-  acmeFileName, _ := os.LookupEnv("ACME_FILE")
+  acmePath, exists := os.LookupEnv("ACME_PATH")
+  if !exists {
+    acmePath = "/acme"
+  }
+
+  acmeFileName, exists := os.LookupEnv("ACME_FILE")
+  if !exists {
+    acmeFileName = "acme.json"
+  }
+
   acmeFile = fmt.Sprintf("%s/%s", acmePath, acmeFileName)
 
   // Setup watcher
