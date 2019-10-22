@@ -62,7 +62,6 @@ func buildCerts() {
   var acme Acme
   json.Unmarshal(f, &acme)
   for _, cert := range acme.DefaultProvider.Certificates {
-    fmt.Println("Attempting cert", cert.Domain.Main)
     // Decode
     decoded, err := base64.StdEncoding.DecodeString(cert.Certificate)
     if err != nil {
@@ -133,7 +132,8 @@ func main() {
   }
 
   acmePath, _ := os.LookupEnv("ACME_PATH")
-  acmeFile = fmt.Sprintf("%s/acme.json", acmePath)
+  acmeFileName, _ := os.LookupEnv("ACME_FILE")
+  acmeFile = fmt.Sprintf("%s/%s", acmePath, acmeFileName)
 
   // Setup watcher
   watcher, err := fsnotify.NewWatcher()

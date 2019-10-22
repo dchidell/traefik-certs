@@ -3,6 +3,7 @@
 
 Minimal service to extract SSL certificates from traefik and create certificate files for use elsewhere.
 
+Modified by David Chidell to conform to traefik v2.0 certificate files & customise filename.
 
 ## Quick Start
 
@@ -16,6 +17,7 @@ The environment variables are:
 |--------------------|-------|-----------|
 |CERT_PATH|`/certs`|Path to directory where certs will be placed|
 |ACME_PATH|` `|Path to acme.json created by traefik|
+|ACME_FILE|` `|Filename (usually acme.json) created by traefik|
 
 ## Output
 
