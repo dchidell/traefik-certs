@@ -15,13 +15,13 @@ import (
 // Structs
 
 type CertificateDomain struct {
-  Main string `json:"main"`
+  Main string `json:"Main"`
 }
 
 type Certificate struct {
-  Domain CertificateDomain `json:"domain"`
-  Certificate string `json:"certificate"`
-  Key string `json:"key"`
+  Domain CertificateDomain `json:"Domain"`
+  Certificate string `json:"Certificate"`
+  Key string `json:"Key"`
 }
 
 type Provider struct{
