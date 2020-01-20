@@ -15,21 +15,25 @@ import (
 // Structs
 
 type CertificateDomain struct {
-  Main string `json:"Main"`
+  Main string `json:"main"`
 }
 
 type Certificate struct {
-  Domain CertificateDomain `json:"Domain"`
-  Certificate string `json:"Certificate"`
-  Key string `json:"Key"`
+  Domain CertificateDomain `json:"domain"`
+  Certificate string `json:"certificate"`
+  Key string `json:"key"`
 }
 
 type Provider struct{
   Certificates []Certificate `json:"Certificates"`
 }
 
+type LetsEncrypt struct{
+  DefaultProvider Provider `json:"le"`
+}
+
 type Acme struct {
-  DefaultProvider Provider `json:"default"`
+  CertAuthority LetsEncrypt `json:"default"`
 }
 
 // Find given name in certificate array
@@ -61,7 +65,7 @@ func buildCerts() {
 
   var acme Acme
   json.Unmarshal(f, &acme)
-  for _, cert := range acme.DefaultProvider.Certificates {
+  for _, cert := range acme.CertAuthority.DefaultProvider.Certificates {
     // Decode
     decoded, err := base64.StdEncoding.DecodeString(cert.Certificate)
     if err != nil {
@@ -114,7 +118,7 @@ func buildCerts() {
       continue
     }
 
-    if !findDomain(domain, acme.DefaultProvider.Certificates) {
+    if !findDomain(domain, acme.CertAuthority.DefaultProvider.Certificates) {
       fmt.Println("Removing file", f.Name())
       os.Remove(fmt.Sprintf("%s/%s", certPath, f.Name()))
     }
